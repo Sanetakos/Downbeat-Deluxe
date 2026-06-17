@@ -2,48 +2,67 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0d0d12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Nexus Gaming News | Downbeat Deluxe Tournament</title>
     <style>
         /* Grundlegendes Styling & Dark Mode */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background-color: #0d0d12;
             color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            font-size: 16px;
         }
 
         /* Header Styling */
         header {
             background: #15151e;
-            padding: 20px 0;
+            padding: 15px 10px;
             text-align: center;
             border-bottom: 3px solid #00d26a;
             box-shadow: 0 4px 15px rgba(0, 210, 106, 0.2);
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         header h1 {
             margin: 0;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 2em;
+            letter-spacing: 2px;
+            font-size: clamp(1.4rem, 5vw, 2em);
+            word-break: break-word;
         }
 
         header h1 span {
             color: #00d26a;
+            display: block;
         }
 
         /* Hauptcontainer */
         .container {
             max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 20px auto;
+            padding: 0 10px;
+            width: 100%;
         }
 
         /* Artikel Container */
@@ -53,6 +72,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border: 1px solid #2a2a35;
+            margin-bottom: 20px;
         }
 
         /* Bilder Styling */
@@ -61,10 +81,12 @@
             height: auto;
             display: block;
             border-bottom: 2px solid #2a2a35;
+            max-height: 60vh;
+            object-fit: cover;
         }
 
         .content {
-            padding: 30px;
+            padding: clamp(15px, 5vw, 30px);
         }
 
         /* Typografie im Artikel */
@@ -72,87 +94,343 @@
             color: #ff00ff;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.9em;
+            font-size: clamp(0.75rem, 2vw, 0.9em);
             letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         h2 {
             color: #ffffff;
-            font-size: 2.2em;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            font-size: clamp(1.5rem, 6vw, 2.2em);
+            margin: 10px 0;
             line-height: 1.2;
+            word-break: break-word;
         }
 
         .meta {
             color: #888;
-            font-size: 0.9em;
-            margin-bottom: 25px;
+            font-size: clamp(0.75rem, 2vw, 0.9em);
+            margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 1px solid #333;
+            overflow-wrap: break-word;
         }
 
         p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
+            font-size: clamp(0.95rem, 2.5vw, 1.1em);
+            margin-bottom: 15px;
+            line-height: 1.7;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Layout für Bilder im Text */
         .inline-media {
             display: flex;
-            gap: 20px;
-            margin: 30px 0;
+            gap: clamp(10px, 3vw, 20px);
+            margin: clamp(20px, 5vw, 30px) 0;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .inline-media img {
-            width: 50%;
+            flex: 1;
+            min-width: 200px;
+            max-width: 100%;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             object-fit: cover;
+            height: auto;
+            display: block;
         }
 
         .inline-media .text-block {
-            width: 50%;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .inline-media .text-block p {
+            margin-bottom: 10px;
         }
 
         .quote {
             background: rgba(255, 0, 255, 0.1);
             border-left: 4px solid #ff00ff;
-            padding: 15px 20px;
+            padding: clamp(12px, 3vw, 20px);
             font-style: italic;
-            margin: 30px 0;
+            margin: clamp(20px, 5vw, 30px) 0;
             border-radius: 0 8px 8px 0;
+            font-size: clamp(0.9rem, 2vw, 1.1em);
+            line-height: 1.7;
+            word-break: break-word;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: clamp(20px, 5vw, 30px);
             background: #0d0d12;
             color: #555;
             border-top: 1px solid #1a1a24;
             margin-top: 40px;
+            font-size: clamp(0.75rem, 2vw, 0.9em);
         }
 
-        /* Responsive Design für mobile Geräte */
-        @media (max-width: 768px) {
-            .inline-media {
-                flex-direction: column;
+        /* ===== MOBILE FIRST RESPONSIVE DESIGN ===== */
+
+        /* Tablets: 768px - 1024px */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
             }
-            .inline-media img, .inline-media .text-block {
-                width: 100%;
+
+            header h1 {
+                letter-spacing: 3px;
             }
+
+            header h1 span {
+                display: inline;
+                margin-left: 10px;
+            }
+
+            .container {
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 30px;
+            }
+
             h2 {
-                font-size: 1.8em;
+                margin-top: 10px;
+                margin-bottom: 10px;
             }
+
+            .inline-media {
+                flex-wrap: nowrap;
+            }
+
+            .inline-media img {
+                min-width: auto;
+                width: 50%;
+                flex: 0 0 50%;
+            }
+
+            .inline-media .text-block {
+                min-width: auto;
+                width: 50%;
+                flex: 0 0 50%;
+            }
+        }
+
+        /* Desktops: 1024px+ */
+        @media (min-width: 1024px) {
+            header {
+                padding: 20px 0;
+            }
+
+            header h1 {
+                font-size: 2em;
+                letter-spacing: 3px;
+            }
+
+            .container {
+                max-width: 900px;
+            }
+
+            .inline-media {
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        /* Sehr kleine Bildschirme: unter 360px */
+        @media (max-width: 360px) {
+            header h1 {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin: 8px 0;
+            }
+
+            p {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+            }
+
+            .category {
+                font-size: 0.7rem;
+            }
+
+            .meta {
+                font-size: 0.75rem;
+                margin-bottom: 15px;
+            }
+
+            .quote {
+                padding: 10px 15px;
+                margin: 15px 0;
+                font-size: 0.9rem;
+            }
+
+            .inline-media {
+                gap: 10px;
+                margin: 15px 0;
+            }
+
+            .container {
+                margin: 15px auto;
+                padding: 0 8px;
+            }
+        }
+
+        /* Landscape Mode Optimierung */
+        @media (max-height: 500px) and (orientation: landscape) {
+            header {
+                padding: 8px 10px;
+            }
+
+            header h1 {
+                font-size: 1.3rem;
+                margin: 0;
+            }
+
+            .hero-img {
+                max-height: 40vh;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin: 5px 0;
+            }
+
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .inline-media {
+                margin: 10px 0;
+                gap: 10px;
+            }
+
+            .quote {
+                padding: 10px 12px;
+                margin: 10px 0;
+            }
+        }
+
+        /* Touch Device Optimierung */
+        @media (hover: none) and (pointer: coarse) {
+            body {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            p, .quote, .meta {
+                -webkit-user-select: text;
+                user-select: text;
+            }
+
+            a {
+                padding: 8px 4px;
+            }
+        }
+
+        /* Reduced Motion für Barrierefreiheit */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Dark Mode für Systemeinstellung */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0d0d12;
+                color: #e0e0e0;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: more) {
+            body {
+                color: #ffffff;
+            }
+
+            h2 {
+                color: #ffffff;
+            }
+
+            .category {
+                color: #00d26a;
+            }
+
+            header {
+                border-bottom: 4px solid #00d26a;
+            }
+        }
+
+        /* Print Optimierung */
+        @media print {
+            header, footer {
+                display: none;
+            }
+
+            .article-card {
+                box-shadow: none;
+                border: 1px solid #999;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            a {
+                color: #0066cc;
+            }
+        }
+
+        /* Scrollbar Styling für moderne Browser */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d0d12;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00d26a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00c454;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Nexus <span>Gaming</span> News</h1>
+        <h1>Nexus <span>Gaming News</span></h1>
     </header>
 
     <div class="container">
@@ -165,43 +443,43 @@
                 <div class="meta">Veröffentlicht am 18. Juli 2026 | Von Redaktion | Lesezeit: 4 Minuten</div>
 
                 <p>
-                    Die Gaming-Welt hält den Atem an: Das mit Hochspannung erwartete Downbeat Deluxe Online Tournament hat am Freitagabend ihre unangefochtene Championin gefunden. In einem atemberaubenden Finale setzte sich Dr. Fossilia mit ihrer unschlagbaren Strategie gegen die stärkste Konkurrenz durch und schrieb damit Geschichte im professionellen E-Sport.
+                    Die Gaming-Welt hält den Atem an: Das mit Hochspannung erwartete Downbeat Deluxe Online Tournament hat am Freitagabend ihre unangefochtene Championin gefunden. In einem atembeaubenden Finale setzte sich Dr. Fossilia gegen das favorisierte Team NextGen Pro Gaming durch und schrieb damit Esports-Geschichte.
                 </p>
 
                 <div class="inline-media">
                     <img src="Dr. Fossilia.png" alt="Dr. Fossilia Neon Logo">
                     <div class="text-block">
                         <p>
-                            Downbeat Deluxe hat sich in den letzten Monaten als absoluter König der taktischen 5v5 Beat 'em up Spiele etabliert. Die komplexen Mechaniken, bei denen perfektes Timing, präzise Koordination und blitzschnelle Reflexe entscheidend sind, haben eine völlig neue Generation von Spielern angezogen und die E-Sport-Szene revolutioniert.
+                            Downbeat Deluxe hat sich in den letzten Monaten als absoluter König der taktischen 5v5 Beat 'em up Spiele etabliert. Die komplexen Mechaniken, bei denen perfektes Timing und Teamkoordination entscheidend sind, machen dieses Spiel zum Lieblingskind der Competitive Gaming Scene.
                         </p>
                         <p>
-                            Dr. Fossilia, die mit dem Slogan "Ready to Dominate" antrat, machte diesem Motto alle Ehre. Mit einer unberechenbaren Charakterauswahl und einer Fehlerquote nahe Null trieb sie ihre Gegner zur Verzweiflung und zeigte ein Niveau des Gameplays, das selbst erfahrene Profis zum Staunen brachte.
+                            Dr. Fossilia, die mit dem Slogan "Ready to Dominate" antrat, machte diesem Motto alle Ehre. Mit einer unberechenbaren Charakterauswahl und einer Fehlerquote nahe Null dominierte sie das Turnier von Anfang an.
                         </p>
                     </div>
                 </div>
 
                 <p>
-                   Besonders beeindruckend war das Teamplay im entscheidenden Best-of-Five. In einem 5v5-Setup ist die Kommunikation der Schlüssel zum Erfolg. Während die gegnerischen Teams unter dem Druck zusammenzubrechen begannen, zeigte Dr. Fossilia's Squad eine eiserne Disziplin und mentale Stärke, die beispiellos ist.
+                   Besonders beeindruckend war das Teamplay im entscheidenden Best-of-Five. In einem 5v5-Setup ist die Kommunikation der Schlüssel zum Erfolg. Während die gegnerischen Teams untereinander heftig debattierten und Calls hinterfragten, agierte Dr. Fossilia und ihr Team wie eine Einheit.
                 </p>
 
                 <div class="quote">
-                    "Die Synergie war unglaublich. Wir wussten genau, wann wir pushen und wann wir uns zurückziehen mussten. Dr. Fossilia hat die Calls gemacht, und wir haben einfach funktioniert. Es war wie ein perfekt choreografierter Tanz, bei dem jeder Spieler seine Rolle perfekt erfüllte." - Captain Phoenix, Teamleader
+                    "Die Synergie war unglaublich. Wir wussten genau, wann wir pushen und wann wir uns zurückziehen mussten. Dr. Fossilia hat die Calls gemacht, und wir haben einfach funktioniert. Das war wie Tanz – jeder Schritt saß perfekt."
                 </div>
 
                 <div class="inline-media" style="flex-direction: row-reverse;">
                     <img src="Bild E-Sport Tournament (1).png" alt="E-Sport Team hochkonzentriert am PC">
                     <div class="text-block">
                         <p>
-                            Die Bilder aus dem Turnier-Hub sprechen für sich. Absolute Konzentration, der ständige Austausch über die Headsets und der Tunnelblick auf den Monitor prägten die Atmosphäre während der intensiven Spielsessions. Jede Sekunde zählte, und das Team nutzte diese kostbare Zeit optimal, um sich gegen ihre Rivalen durchzusetzen.
+                            Die Bilder aus dem Turnier-Hub sprechen für sich. Absolute Konzentration, der ständige Austausch über die Headsets und der Tunnelblick auf den Monitor prägten die gesamte Veranstaltung.
                         </p>
                         <p>
-                            Die auf dem nebenstehenden Bild ganz vorne sitzende Frau ist keine andere als die triumphale Dr. Fossilia höchstpersönlich. Mit diesem Triumph katapultiert sie sich an die Spitze der internationalen E-Sport-Rankings und sichert sich nicht nur den prestigeträchtigen Titel, sondern auch ein beachtliches Preisgeld von 500.000 Euro für sich und ihr Team.
+                            Die auf dem nebenstehenden Bild ganz vorne sitzende Frau ist keine andere als die triumphale Dr. Fossilia höchstpersönlich. Mit diesem Triumph katapultiert sie sich in die Liste der legendären Esports-Champions.
                         </p>
                     </div>
                 </div>
 
                 <p>
-                    Wir gratulieren der neuen Championin und bedanken uns bei Synaptic_Net Systems und Data_Stream Systems für die großartige Organisation und Ausrichtung des Turniers. Wer das Finale verpasst hat, kann sich die vollständige Aufzeichnung auf unserem Streaming-Partner-Portal anschauen und wird garantiert fasziniert sein von der außergewöhnlichen Leistung, die Dr. Fossilia und ihr Team abgeliefert haben. Das nächste große Tournament findet bereits in drei Monaten statt!
+                    Wir gratulieren der neuen Championin und bedanken uns bei Synaptic_Net Systems und Data_Stream Systems für die großartige Organisation und Ausrichtung des Turniers. Wer das nächste Turnier verpasst hat, sollte sich den Termin für das Finale im Oktober bereits in den Kalender eintragen!
                 </p>
 
             </div>
